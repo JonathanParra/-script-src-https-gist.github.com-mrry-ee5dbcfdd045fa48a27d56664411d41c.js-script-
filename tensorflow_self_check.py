@@ -51,7 +51,7 @@ def main():
     print("""
 - No module named TensorFlow is installed in this Python environment. You may
   install it using the command `pip install tensorflow`.""")
-    
+
   try:
     msvcp140 = ctypes.WinDLL("msvcp140.dll")
   except OSError:
@@ -73,6 +73,18 @@ def main():
   your %PATH% environment variable. Download and install CUDA 8.0 from
   this URL: https://developer.nvidia.com/cuda-toolkit""")
 
+
+  try:
+    nvcuda = ctypes.WinDLL("nvcuda.dll")
+  except OSError:
+    candidate_explanation = True
+    print("""
+- Could not load 'nvcuda.dll'. The GPU version of TensorFlow requires that
+  this DLL be installed in a directory that is named in your %PATH%
+  environment variable. Typically it is installed in 'C:\Windows\System32'.
+  If it is not present, download and install CUDA 8.0 from
+  this URL: https://developer.nvidia.com/cuda-toolkit""")
+    
   try:
     cudnn = ctypes.WinDLL("cudnn64_5.dll")
   except OSError:
