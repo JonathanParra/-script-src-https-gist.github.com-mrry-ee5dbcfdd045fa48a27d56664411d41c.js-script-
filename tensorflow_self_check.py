@@ -82,8 +82,8 @@ def main():
 - Could not load 'nvcuda.dll'. The GPU version of TensorFlow requires that
   this DLL be installed in a directory that is named in your %PATH%
   environment variable. Typically it is installed in 'C:\Windows\System32'.
-  If it is not present, download and install CUDA 8.0 from
-  this URL: https://developer.nvidia.com/cuda-toolkit""")
+  If it is not present, ensure that you have a CUDA-capable GPU with the
+  correct driver installed.""")
     
   try:
     cudnn = ctypes.WinDLL("cudnn64_5.dll")
