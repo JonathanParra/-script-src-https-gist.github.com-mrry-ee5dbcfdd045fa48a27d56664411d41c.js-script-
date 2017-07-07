@@ -38,10 +38,10 @@ def main():
 
   python_version = sys.version_info.major, sys.version_info.minor
   print("\n- Python version is %d.%d." % python_version)
-  if python_version != (3, 5):
+  if not (python_version == (3, 5) or python_version == (3, 6)):
     candidate_explanation = True
     print("- The official distribution of TensorFlow for Windows requires "
-          "Python version 3.5.")
+          "Python version 3.5 or 3.6.")
   
   try:
     _, pathname, _ = imp.find_module("tensorflow")
