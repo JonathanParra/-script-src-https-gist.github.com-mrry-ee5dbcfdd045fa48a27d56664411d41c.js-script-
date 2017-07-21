@@ -73,7 +73,6 @@ def main():
   your %PATH% environment variable. Download and install CUDA 8.0 from
   this URL: https://developer.nvidia.com/cuda-toolkit""")
 
-
   try:
     nvcuda = ctypes.WinDLL("nvcuda.dll")
   except OSError:
@@ -84,9 +83,11 @@ def main():
   environment variable. Typically it is installed in 'C:\Windows\System32'.
   If it is not present, ensure that you have a CUDA-capable GPU with the
   correct driver installed.""")
-    
+
+  cudnn_5_found = False
   try:
-    cudnn = ctypes.WinDLL("cudnn64_5.dll")
+    cudnn5 = ctypes.WinDLL("cudnn64_5.dll")
+    cudnn5_found = True
   except OSError:
     candidate_explanation = True
     print("""
@@ -98,9 +99,37 @@ def main():
   necessary DLL by downloading cuDNN 5.1 from this URL:
   https://developer.nvidia.com/cudnn""")
 
+  cudnn6_found = False
+  try:
+    cudnn = ctypes.WinDLL("cudnn64_6.dll")
+    cudnn6_found = True
+  except OSError:
+    candidate_explanation = True
+
+  if not cudnn5_found or not cudnn6_found:
+    print()
+    if not cudnn5_found and not cudnn6_found):
+      print("- Could not find cuDNN.")
+    elif not cudnn5_found:
+      print("- Could not find cuDNN 5.1.")
+    else:
+      print("- Could not find cuDNN 6.")
+      print("""
+  The GPU version of TensorFlow requires that the correct cuDNN DLL be installed
+  in a directory that is named in your %PATH% environment variable. Note that
+  installing cuDNN is a separate step from installing CUDA, and it is often
+  found in a different directory from the CUDA DLLs. The correct version of
+  cuDNN depends on your version of TensorFlow:
+  
+  * TensorFlow 1.2.1 or earlier requires cuDNN 5.1. ('cudnn64_5.dll')
+  * TensorFlow 1.3 or later requires cuDNN 6. ('cudnn64_6.dll')
+    
+  You may install the necessary DLL by downloading cuDNN from this URL:
+  https://developer.nvidia.com/cudnn""")
+    
   if not candidate_explanation:
     print("""
-- All required DLLs are present. Please open an issue on the
+- All required DLLs appear to be present. Please open an issue on the
   TensorFlow GitHub page: https://github.com/tensorflow/tensorflow/issues""")
 
   sys.exit(-1)
