@@ -108,7 +108,7 @@ def main():
 
   if not cudnn5_found or not cudnn6_found:
     print()
-    if not cudnn5_found and not cudnn6_found):
+    if not cudnn5_found and not cudnn6_found:
       print("- Could not find cuDNN.")
     elif not cudnn5_found:
       print("- Could not find cuDNN 5.1.")
