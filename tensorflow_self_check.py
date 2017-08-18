@@ -84,7 +84,7 @@ def main():
   If it is not present, ensure that you have a CUDA-capable GPU with the
   correct driver installed.""")
 
-  cudnn_5_found = False
+  cudnn5_found = False
   try:
     cudnn5 = ctypes.WinDLL("cudnn64_5.dll")
     cudnn5_found = True
