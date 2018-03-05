@@ -34,6 +34,15 @@ def main():
   except ImportError:
     print("ERROR: Failed to import the TensorFlow module.")
 
+  print("""
+WARNING! This script is no longer maintained! 
+=============================================
+
+Since TensorFlow 1.4, the self-check has been integrated with TensorFlow itself,
+and any missing DLLs will be reported when you execute the `import tensorflow`
+statement. The error messages printed below refer to TensorFlow 1.3 and earlier,
+and are inaccurate for later versions of TensorFlow.""")
+    
   candidate_explanation = False
 
   python_version = sys.version_info.major, sys.version_info.minor
